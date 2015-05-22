@@ -184,6 +184,12 @@ Definition negb (b:bool) : bool :=
   | false => true
   end.
 
+Definition negate_bool (b: bool) : bool :=
+  match b with
+    | true => false
+    | false => true
+  end.
+
 Definition andb (b1:bool) (b2:bool) : bool := 
   match b1 with 
   | true => b2 
