@@ -184,12 +184,6 @@ Definition negb (b:bool) : bool :=
   | false => true
   end.
 
-Definition negate_bool (b: bool) : bool :=
-  match b with
-    | true => false
-    | false => true
-  end.
-
 Definition andb (b1:bool) (b2:bool) : bool := 
   match b1 with 
   | true => b2 
@@ -241,19 +235,38 @@ Proof. reflexivity.  Qed.
     its inputs are [false]. *)
 
 Definition nandb (b1:bool) (b2:bool) : bool :=
-  (* FILL IN HERE *) admit.
+  match b1, b2 with
+  | true, true => false
+  | false, false => true
+  | true, false => true
+  | false, true => true
+  end.
 
 (** Remove "[Admitted.]" and fill in each proof with 
     "[Proof. reflexivity. Qed.]" *)
 
 Example test_nandb1:               (nandb true false) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_nandb2:               (nandb false false) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_nandb3:               (nandb false true) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_nandb4:               (nandb true true) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
+(** [] *)
+
+(** Another way of defining the function *)
+
+Definition nandb_ (b1:bool) (b2:bool) : bool := negb (andb b1 b2).
+
+Example test_nandb1:               (nandb_ true false) = true.
+Proof. reflexivity. Qed.
+Example test_nandb2:               (nandb_ false false) = true.
+Proof. reflexivity. Qed.
+Example test_nandb3:               (nandb_ false true) = true.
+Proof. reflexivity. Qed.
+Example test_nandb4:               (nandb_ true true) = false.
+Proof. reflexivity. Qed.
 (** [] *)
 
 (** **** Exercise: 1 star (andb3)  *)
